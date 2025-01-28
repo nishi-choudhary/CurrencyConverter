@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Import for FilteringTextInputFormatter
 
 class CurrencyConverterMaterialPage extends StatefulWidget {
   const CurrencyConverterMaterialPage({super.key});
@@ -89,10 +90,6 @@ class _CurrencyConverterMaterialState extends State<CurrencyConverterMaterialPag
                   hintStyle: const TextStyle(
                     color: Colors.grey, // Placeholder text color
                   ),
-                  labelText: "Please enter the amount in INR",
-                  labelStyle: const TextStyle(
-                    color: Colors.amber,
-                  ),
                   prefixIcon: const Icon(Icons.monetization_on),
                   prefixIconColor: Colors.black,
                   filled: true,
@@ -103,6 +100,9 @@ class _CurrencyConverterMaterialState extends State<CurrencyConverterMaterialPag
                 keyboardType: TextInputType.numberWithOptions(
                   decimal: true, // Ensures numeric keyboard with decimal point
                 ),
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')), // Allows only numbers and a decimal point
+                ],
               ),
               const SizedBox(height: 20),
               Row(
